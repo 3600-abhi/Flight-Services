@@ -4,7 +4,7 @@ const { ErrorResponse, SuccessResponse } = require("../utils/common");
 
 /**
  * POST: /airplanes
- * req-body: {modelNumber: 'airbus', capacity: 320}
+ * req.body: {modelNumber: 'airbus', capacity: 320}
  */
 
 async function createAirplane(req, res) {
@@ -54,8 +54,24 @@ async function getAirplane(req, res) {
   }
 }
 
+/**
+ * DELETE: /airplanes/:id
+ * req.body: {}
+ */
+async function destroyAirplane(req, res) {
+  try {
+    const response = await AirplaneService.destroyAirplane(req.params.id);
+    SuccessResponse.data = response;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error; // the error is an instance of AppError class
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
 module.exports = {
   createAirplane,
   getAirplanes,
   getAirplane,
+  destroyAirplane,
 };

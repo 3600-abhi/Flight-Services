@@ -13,16 +13,28 @@ class CrudRepository {
   }
 
   async destroy(data) {
+    // in sequelize while deleting the resource
+    // if resource found and deleted successfully the it return 1  (response = 1)
+    // if resource not found the it return 0 (response = 0)
     const response = await this.model.destroy({
       where: {
         id: data,
       },
     });
 
+    if (!response) {
+      throw new AppError(
+        "resource you are trying to delete is not present",
+        StatusCodes.NOT_FOUND
+      );
+    }
+
     return response;
   }
 
   async get(data) {
+    // if resource you are trying to fetch is not present then it resturns (null)
+    // otherwise return that object
     const response = await this.model.findByPk(data);
     if (!response) {
       throw new AppError(
