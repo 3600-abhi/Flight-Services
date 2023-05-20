@@ -52,11 +52,19 @@ class CrudRepository {
 
   async update(id, data) {
     // data is object --> {col: value, ........}
+
+    // Update function of sequelize returns a number of affected rows
+    // (first parameter of result array).
     const response = await this.model.update(data, {
       where: {
         id: id,
       },
     });
+
+    if (!response[0]) {
+      throw new AppError("record not found", StatusCodes.NOT_FOUND);
+    }
+
     return response;
   }
 }

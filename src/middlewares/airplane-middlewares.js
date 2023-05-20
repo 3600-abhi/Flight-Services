@@ -16,6 +16,21 @@ function validateCreateRequest(req, res, next) {
   next();
 }
 
+function validateUpdateRequest(req, res, next) {
+  if (!req.body.capacity) {
+    ErrorResponse.message = "something went wrong while updating the airplane";
+    ErrorResponse.error = new AppError(
+      ["capacity not found in incoming request"],
+      StatusCodes.BAD_REQUEST
+    );
+
+    return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
+  }
+
+  next();
+}
+
 module.exports = {
   validateCreateRequest,
+  validateUpdateRequest,
 };
