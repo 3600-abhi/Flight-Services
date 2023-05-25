@@ -16,6 +16,19 @@ function validateCreateRequest(req, res, next) {
   next();
 }
 
+function validateUpdateRequest(req, res, next) {
+  if (!req.body.name) {
+    ErrorResponse.message = "something went wrong while updating city";
+    ErrorResponse.error = new AppError(
+      ["city name not found in incoming request"],
+      StatusCodes.BAD_REQUEST
+    );
+  }
+
+  next();
+}
+
 module.exports = {
   validateCreateRequest,
+  validateUpdateRequest,
 };

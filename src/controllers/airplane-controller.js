@@ -55,20 +55,9 @@ async function getAirplane(req, res) {
 }
 
 /**
- * DELETE: /airplanes/:id
- * req.body: {}
+ * PATCH: /airplanes/:id
+ * req.body: {capacity: 525}
  */
-async function destroyAirplane(req, res) {
-  try {
-    const response = await AirplaneService.destroyAirplane(req.params.id);
-    SuccessResponse.data = response;
-    return res.status(StatusCodes.OK).json(SuccessResponse);
-  } catch (error) {
-    ErrorResponse.error = error; // the error is an instance of AppError class
-    return res.status(error.statusCode).json(ErrorResponse);
-  }
-}
-
 async function updateAirplane(req, res) {
   try {
     const airplane = await AirplaneService.updateAirplane(
@@ -76,7 +65,22 @@ async function updateAirplane(req, res) {
       req.body
     );
 
-    SuccessResponse.message = "updated the airplane sucessfully";
+    SuccessResponse.message = "updated the airplane capacity sucessfully";
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error; // the error is an instance of AppError class
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
+/**
+ * DELETE: /airplanes/:id
+ * req.body: {}
+ */
+async function destroyAirplane(req, res) {
+  try {
+    const response = await AirplaneService.destroyAirplane(req.params.id);
+    SuccessResponse.data = response;
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error; // the error is an instance of AppError class

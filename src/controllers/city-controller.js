@@ -19,6 +19,21 @@ async function createCity(req, res) {
 }
 
 /**
+ * PATCH: /cities/:id
+ * req.body: {name: "Mumbai"}
+ */
+async function updateCity(req, res) {
+  try {
+    const response = await CityService.updateCity(req.params.id, req.body);
+    SuccessResponse.message = "updated the city name successfully";
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error; // this error object is (AppError) object
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
+/**
  * DELETE: /cities/:id
  * req.body: {}
  */
@@ -36,5 +51,6 @@ async function destroyCity(req, res) {
 
 module.exports = {
   createCity,
+  updateCity,
   destroyCity,
 };

@@ -13,10 +13,19 @@ router.post(
   CityController.createCity
 );
 
+/**
+ * PATCH: /api/v1/cities/:id
+ * req.body: {name: "Mumbai"}
+ */
+router.patch(
+  "/:id",
+  CityMiddlewares.validateUpdateRequest,
+  CityController.updateCity
+);
 
-/** 
+/**
  * DELETE: /api/v1/cities/:id
-*/
+ */
 router.delete("/:id", CityController.destroyCity);
 
 module.exports = router;
