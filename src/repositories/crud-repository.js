@@ -15,7 +15,7 @@ class CrudRepository {
   async destroy(data) {
     // in sequelize while deleting the resource
     // if resource found and deleted successfully the it return 1  (response = 1)
-    // if resource not found the it return 0 (response = 0)
+    // if resource not found then it return 0 (response = 0)
     const response = await this.model.destroy({
       where: {
         id: data,

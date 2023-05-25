@@ -41,7 +41,7 @@ async function getAirplane(id) {
   } catch (error) {
     if (error.statusCode === StatusCodes.NOT_FOUND) {
       throw new AppError(
-        "The airpplane you requested is not present",
+        "The airplane you requested is not present",
         error.statusCode
       );
     }

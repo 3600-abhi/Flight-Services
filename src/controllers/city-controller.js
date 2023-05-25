@@ -18,6 +18,23 @@ async function createCity(req, res) {
   }
 }
 
+/**
+ * DELETE: /cities/:id
+ * req.body: {}
+ */
+async function destroyCity(req, res) {
+  try {
+    const response = await CityService.destroyCity(req.params.id);
+    SuccessResponse.message = "successfully deleted the city";
+    SuccessResponse.data = response;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error; // this error object is (AppError) object
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
 module.exports = {
   createCity,
+  destroyCity,
 };
