@@ -60,6 +60,7 @@ async function getAirplane(req, res) {
  */
 async function updateAirplane(req, res) {
   try {
+    // here the value of airplane is number of rows altered
     const airplane = await AirplaneService.updateAirplane(
       req.params.id,
       req.body
