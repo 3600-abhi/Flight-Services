@@ -41,8 +41,6 @@ class CrudRepository {
       },
     });
 
-    console.log("response : ", response);
-
     if (!response[0]) {
       throw new AppError("record not found", StatusCodes.NOT_FOUND);
     }

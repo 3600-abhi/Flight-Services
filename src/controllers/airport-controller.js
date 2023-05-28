@@ -16,7 +16,7 @@ async function createAirport(req, res) {
     });
 
     SuccessResponse.data = airport;
-    return res.status(StatusCodes.OK).json(SuccessResponse);
+    return res.status(StatusCodes.CREATED).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error; // this error object is (AppError) object
     return res.status(error.statusCode).json(ErrorResponse);
