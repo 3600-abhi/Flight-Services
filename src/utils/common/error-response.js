@@ -1,6 +1,6 @@
 const error = {
   success: false,
-  message: "something went wrong",
+  message: "Something went wrong",
   data: {},
   error: {},
 };

@@ -27,12 +27,24 @@ async function createFlight(req, res) {
       arrivalTime: req.body.arrivalTime,
       price: req.body.price,
       boardingGate: req.body.boardingGate,
-      totalSeats: req.body.totalSeats,
+      remainingSeats: req.body.remainingSeats,
     });
 
-    SuccessResponse.data = flight;
     SuccessResponse.message = "Successfully created the Flight";
+    SuccessResponse.data = flight;
     return res.status(StatusCodes.CREATED).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error; // this error object is (AppError) object
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
+async function getAllFlights(req, res) {
+  try {
+    const flights = await FlightService.getAllFlights(req.query);
+    SuccessResponse.message = "Successfully fetched the Flights";
+    SuccessResponse.data = flights;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error; // this error object is (AppError) object
     return res.status(error.statusCode).json(ErrorResponse);
@@ -41,4 +53,5 @@ async function createFlight(req, res) {
 
 module.exports = {
   createFlight,
+  getAllFlights,
 };

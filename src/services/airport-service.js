@@ -28,7 +28,7 @@ async function getAirports() {
     return airports;
   } catch (error) {
     throw new AppError(
-      "Cannot fetch data of all airports",
+      "Cannot fetch data of airports",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }

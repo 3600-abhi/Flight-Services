@@ -9,7 +9,7 @@ const { ErrorResponse, SuccessResponse } = require("../utils/common");
 async function createCity(req, res) {
   try {
     const city = await CityService.createCity({ name: req.body.name });
-    SuccessResponse.message = "successfully created the city";
+    SuccessResponse.message = "Successfully created the city";
     SuccessResponse.data = city;
     return res.status(StatusCodes.CREATED).json(SuccessResponse);
   } catch (error) {
@@ -25,7 +25,7 @@ async function createCity(req, res) {
 async function updateCity(req, res) {
   try {
     const response = await CityService.updateCity(req.params.id, req.body);
-    SuccessResponse.message = "updated the city name successfully";
+    SuccessResponse.message = "Successfully updated the city Name";
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error; // this error object is (AppError) object
@@ -40,7 +40,7 @@ async function updateCity(req, res) {
 async function destroyCity(req, res) {
   try {
     const response = await CityService.destroyCity(req.params.id);
-    SuccessResponse.message = "successfully deleted the city";
+    SuccessResponse.message = "Successfully deleted the city";
     SuccessResponse.data = response;
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
