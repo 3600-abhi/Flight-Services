@@ -47,12 +47,16 @@ async function getAllFlights(query) {
   if (query.sort) {
     const params = query.sort.split(",");
     sortFilter = params.map((param) => param.split("_"));
-    console.log("sortFilter : ", sortFilter);
   }
 
   if (query.tripDate) {
+    const dayStartingTime = " 00:00:00";
+    const dayEndingTime = " 23:59:59";
     customFilter.departureTime = {
-      [Op.between]: [query.tripDate, query.tripDate + " 23:59:00"],
+      [Op.between]: [
+        query.tripDate + dayStartingTime,
+        query.tripDate + dayEndingTime,
+      ],
     };
   }
 
