@@ -47,7 +47,7 @@ async function getAirport(id) {
     }
 
     throw new AppError(
-      "cannot fetch airport",
+      "Cannot fetch airport",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }

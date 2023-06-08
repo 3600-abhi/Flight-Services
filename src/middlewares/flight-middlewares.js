@@ -108,6 +108,33 @@ function validateCreateRequest(req, res, next) {
   next();
 }
 
+function validateUpdateRemainingSeatsRequest(req, res, next) {
+  if (req.body.seats === undefined) {
+    ErrorResponse.message =
+      "Something went wrong while updating the remaining seats";
+    ErrorResponse.error = new AppError(
+      ["seats not found in incoming request"],
+      StatusCodes.BAD_REQUEST
+    );
+
+    return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
+  }
+
+  if (req.body.toDecrease === undefined) {
+    ErrorResponse.message =
+      "Something went wrong while updating the remaining seats";
+    ErrorResponse.error = new AppError(
+      ["toDecrease not found in incoming request"],
+      StatusCodes.BAD_REQUEST
+    );
+
+    return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
+  }
+
+  next();
+}
+
 module.exports = {
   validateCreateRequest,
+  validateUpdateRemainingSeatsRequest,
 };

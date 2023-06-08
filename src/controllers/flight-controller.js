@@ -51,7 +51,43 @@ async function getAllFlights(req, res) {
   }
 }
 
+/**
+ * GET: /flights/:id
+ * req.body: {}
+ */
+async function getFlight(req, res) {
+  try {
+    const flight = await FlightService.getFlight(req.params.id);
+    SuccessResponse.message = "Successfully fetched the flight";
+    SuccessResponse.data = flight;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error; // this error object is (AppError) object
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
+async function updateRemainingSeats(req, res) {
+  try {
+    const response = await FlightService.updateRemainingSeats({
+      flightId: req.params.id,
+      seats: req.body.seats,
+      toDecrease: req.body.toDecrease,
+    });
+
+    SuccessResponse.data = response;
+    SuccessResponse.message = "Successfully updated the remaning seats";
+
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error; // this error object is (AppError) object
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+  }
+}
+
 module.exports = {
   createFlight,
   getAllFlights,
+  getFlight,
+  updateRemainingSeats,
 };

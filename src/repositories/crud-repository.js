@@ -13,12 +13,12 @@ class CrudRepository {
   }
 
   async get(data) {
-    // if resource you are trying to fetch is not present then it resturns (null)
+    // if resource you are trying to fetch is not present then it returns (null)
     // otherwise return that object
     const response = await this.model.findByPk(data);
     if (!response) {
       throw new AppError(
-        "not able to find the resource",
+        "Not able to find the resource",
         StatusCodes.NOT_FOUND
       );
     }
