@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', apiRoutes);
 
 // If the request from Reverse-Proxy Server
+// currenty not needed because we have redirected using pathRewrite inside options
 // app.use('/flightservice/api', apiRoutes);
 
 app.listen(ServerConfig.PORT, () => {
